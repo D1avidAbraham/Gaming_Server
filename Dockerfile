@@ -47,7 +47,13 @@ RUN apt-get update \
     liblist-moreutils-perl \
     libdatetime-timezone-perl \
     dialog \
-  && git lfs install
+    fuse \
+    software-properties-common \
+  && git lfs install \
+  && sudo dpkg --add-architecture i386 \
+  && sudo apt-get update \
+  && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    steam 
 
 
 # Install ZeroTier VPN
