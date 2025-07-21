@@ -52,3 +52,45 @@ RUN apt-get update \
 
 # Install ZeroTier VPN
 RUN curl -s https://install.zerotier.com | bash
+
+
+
+# Set locale
+RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
+  && locale-gen
+ENV LANG=en_US.UTF-8
+
+
+# Create a user and configure their environment
+RUN useradd -l -u 1000 -G sudo -md /home/gamer -s /bin/bash -p gamer gamer \
+    && sed -i.bkp -e '/Defaults\tuse_pty/d' -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+
+
+# sets the password for david
+RUN echo 'gamer:gamer' | chpasswd
+
+# open this ports
+EXPOSE 22
+EXPOSE 47984-47990/tcp
+EXPOSE 47998-48000/udp
+EXPOSE 48010
+EXPOSE 27031/udp
+EXPOSE 27036/udp
+EXPOSE 27036/tcp
+EXPOSE 27037/tcp
+
+# whichs to the gamer user and goes to /home/gamer
+USER gamer
+WORKDIR /home/gamer
+
+# copies the bashrc
+COPY .bashrc /home/gamer
+
+SHELL ["/bin/bash", "-c"]
+
+# copies the starter file and make it executable
+COPY start_services.sh /usr/local/bin/start_services.sh
+RUN sudo chmod +x /usr/local/bin/start_services.sh
+
+# runs the file
+CMD ["/usr/local/bin/start_services.sh"]
