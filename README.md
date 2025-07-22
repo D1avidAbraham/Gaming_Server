@@ -13,3 +13,4 @@ dpkg: dependency problems prevent configuration of sunshine:
  sunshine depends on libayatana-appindicator3-1; however:
   Package libayatana-appindicator3-1 is not installed.
 
+http://docs.lizardbyte.dev/projects/sunshine/latest/md_DOCKER__README.html
