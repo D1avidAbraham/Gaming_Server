@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Start SSH server
 sudo service ssh start
 

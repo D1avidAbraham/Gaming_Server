@@ -1,0 +1,18 @@
+version: '3'
+services:
+  <image_name>:
+    image: <image>
+    container_name: sunshine
+    restart: unless-stopped
+    volumes:
+      - <path to data>:/config
+    environment:
+      - PUID=<uid>
+      - PGID=<gid>
+      - TZ=<timezone>
+    # For testing comment out this config 
+    # ipc: host
+    ports:
+      - "47984-47990:47984-47990/tcp"
+      - "48010:48010"
+      - "47998-48000:47998-48000/udp"
