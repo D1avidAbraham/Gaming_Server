@@ -77,13 +77,6 @@ RUN echo 'gamer:gamer' | chpasswd
 
 # open this ports
 EXPOSE 22
-EXPOSE 47984-47990/tcp
-EXPOSE 47998-48000/udp
-EXPOSE 48010
-EXPOSE 27031/udp
-EXPOSE 27036/udp
-EXPOSE 27036/tcp
-EXPOSE 27037/tcp
 
 # whichs to the gamer user and goes to /home/gamer
 USER gamer
