@@ -1,18 +1,24 @@
-version: '3'
+version: "3"
+
 services:
-  <image_name>:
-    image: <image>
+  game_test:
+    image: game_test2
     container_name: sunshine
     restart: unless-stopped
+
     volumes:
-      - <path to data>:/config
-    environment:
-      - PUID=<uid>
-      - PGID=<gid>
-      - TZ=<timezone>
-    # For testing comment out this config 
-    # ipc: host
+      # Use forward-slashes or wrap Windows paths in quotes
+      - :/home/gamer/.config"
+
     ports:
       - "47984-47990:47984-47990/tcp"
       - "48010:48010"
       - "47998-48000:47998-48000/udp"
+      - "2222:22"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
